@@ -1,11 +1,15 @@
-# DOT Traffic Camera App
+# DOT Traffic Camera Grid
 
-This is a web application that displays live streams from multiple DOT traffic cameras, containerized with Docker for easy deployment.
+![Preview](img/preview.gif)
+
+This web application displays a grid of live streams from multiple DOT traffic cameras, allowing users to monitor traffic conditions across various locations simultaneously.
 
 ## Features
 
-- Displays live video streams from multiple DOT traffic cameras
-- Allows users to select different camera streams from a dropdown menu
+- Displays a grid of traffic camera thumbnails with live video streaming capabilities
+- Allows users to filter cameras by region
+- Provides sorting options by camera name or region
+- Supports playing multiple video streams concurrently
 - Uses HLS.js for compatibility with most modern browsers
 - Containerized with Docker for easy deployment
 
@@ -29,13 +33,24 @@ This is a web application that displays live streams from multiple DOT traffic c
 
 ## Usage
 
-1. Open the application in a web browser.
-2. Use the dropdown menu to select a traffic camera stream.
-3. The selected stream will start playing in the video player.
+1. When you open the application, you'll see a grid of camera thumbnails.
+2. Use the "Filter by Region" dropdown to show cameras from a specific region.
+3. Click "Sort by Name" or "Sort by Region" to reorder the camera grid.
+4. Click the "Play/Pause" button on any thumbnail to start or stop the live video stream.
+5. Multiple streams can be played simultaneously.
 
 ## Adding More Streams
 
-To add more streams, edit the `videoStreams` array in the `src/js/app.js` file. Add new objects with `name` and `url` properties for each new stream.
+The application fetches camera data from an API. To add more streams, you would need to update the API endpoint or the data source it's pulling from.
+
+## Project Structure
+
+- `src/index.html`: Main HTML file
+- `src/css/styles.css`: CSS styles for the application
+- `src/js/app.js`: JavaScript file containing the application logic
+- `Dockerfile`: Instructions for building the Docker container
+- `nginx.conf`: Nginx server configuration
+- `img/preview.gif`: Preview image of the application
 
 ## Dependencies
 
@@ -45,8 +60,12 @@ To add more streams, edit the `videoStreams` array in the `src/js/app.js` file. 
 ## Notes
 
 - Ensure you have the rights to use and display the traffic camera feeds.
-- The current stream URLs are examples and may need to be updated with actual DOT camera URLs.
+- Playing multiple video streams simultaneously can be resource-intensive. Consider the capabilities of the user's device and network.
 
 ## License
 
 This project is open source and available under the MIT License.
+
+## Contributing
+
+Contributions to improve the application are welcome. Please feel free to submit pull requests or open issues to discuss potential enhancements.
