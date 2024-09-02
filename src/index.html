@@ -22,11 +22,15 @@
         </div>
         <div class="flex flex-col md:flex-row justify-between mb-4">
             <div class="flex flex-col md:flex-row items-center mb-4 md:mb-0">
-                <label for="region-filter" class="mr-2 mb-2 md:mb-0">Filter by Region:</label>
-                <select id="region-filter" class="select select-bordered w-full max-w-xs mb-2 md:mb-0 md:mr-2">
-                    <option value="all">All Regions</option>
-                </select>
-                <button id="show-favorites" class="btn btn-primary">Show Favorites</button>
+                <div class="relative">
+                    <select id="region-filter" class="select select-bordered pl-10 pr-4 py-2 appearance-none">
+                        <option value="all">All Regions</option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                    </svg>
+                </div>
+                <button id="show-favorites" class="btn btn-primary ml-2">Show Favorites</button>
             </div>
             <div class="flex">
                 <button id="sort-name" class="btn btn-secondary mr-2">Sort by Name</button>
