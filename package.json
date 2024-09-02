@@ -1,0 +1,24 @@
+{
+  "name": "dot-traffic-camera-grid",
+  "version": "1.0.0",
+  "description": "DOT Traffic Camera Grid Application",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "serve src",
+    "build": "mkdir -p dist && cp -R src/* dist/ && cp public/manifest.json dist/ && cp tailwind.config.js dist/",
+    "test": "jest"
+  },
+  "keywords": ["traffic", "camera", "grid", "DOT"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^13.0.2",
+    "jest": "^27.0.6",
+    "@babel/preset-env": "^7.14.7"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  }
+}
