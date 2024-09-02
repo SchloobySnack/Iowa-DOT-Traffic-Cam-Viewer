@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOT Traffic Camera Grid</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>DOT Traffic Camera Grid</h1>
+        <div class="controls">
+            <div class="filter-controls">
+                <label for="region-filter">Filter by Region:</label>
+                <select id="region-filter">
+                    <option value="all">All Regions</option>
+                </select>
+            </div>
+            <div class="sort-controls">
+                <button id="sort-name">Sort by Name</button>
+                <button id="sort-region">Sort by Region</button>
+            </div>
+        </div>
+        <div id="cameraGrid" class="camera-grid"></div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
