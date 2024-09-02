@@ -1,71 +1,71 @@
 # DOT Traffic Camera Grid
 
-![Preview](img/preview.gif)
-
-This web application displays a grid of live streams from multiple DOT traffic cameras, allowing users to monitor traffic conditions across various locations simultaneously.
+A web application for viewing and managing Department of Transportation (DOT) traffic cameras.
 
 ## Features
 
-- Displays a grid of traffic camera thumbnails with live video streaming capabilities
-- Allows users to filter cameras by region
-- Provides sorting options by camera name or region
-- Supports playing multiple video streams concurrently
-- Uses HLS.js for compatibility with most modern browsers
-- Containerized with Docker for easy deployment
+- Display a grid of traffic cameras with live video feeds
+- Filter cameras by region
+- Sort cameras by name or region
+- Favorite cameras for quick access
+- Dark mode support
+- Lazy loading of images for improved performance
+- Limit on simultaneous video playback to manage resources
 
-## Prerequisites
+## Technologies Used
 
-- Docker installed on your system
+- HTML5
+- CSS3 with Tailwind CSS and DaisyUI
+- JavaScript (ES6+)
+- HLS.js for video streaming
+- Jest for testing
 
-## Setup and Running with Docker
+## Getting Started
 
-1. Clone this repository to your local machine.
-2. Navigate to the project directory.
-3. Build the Docker image:
+1. Clone the repository:
    ```
-   docker build -t dot-traffic-cam-app .
+   git clone https://github.com/yourusername/dot-traffic-camera-grid.git
    ```
-4. Run the Docker container:
+
+2. Navigate to the project directory:
    ```
-   docker run -d -p 8080:80 dot-traffic-cam-app
+   cd dot-traffic-camera-grid
    ```
-5. Open a web browser and navigate to `http://localhost:8080`
 
-## Usage
+3. Install dependencies:
+   ```
+   npm install
+   ```
 
-1. When you open the application, you'll see a grid of camera thumbnails.
-2. Use the "Filter by Region" dropdown to show cameras from a specific region.
-3. Click "Sort by Name" or "Sort by Region" to reorder the camera grid.
-4. Click the "Play/Pause" button on any thumbnail to start or stop the live video stream.
-5. Multiple streams can be played simultaneously.
+4. Start the development server:
+   ```
+   npm start
+   ```
 
-## Adding More Streams
+5. Open your browser and visit `http://localhost:5000`
 
-The application fetches camera data from an API. To add more streams, you would need to update the API endpoint or the data source it's pulling from.
+## Running Tests
 
-## Project Structure
+To run the test suite:
 
-- `src/index.html`: Main HTML file
-- `src/css/styles.css`: CSS styles for the application
-- `src/js/app.js`: JavaScript file containing the application logic
-- `Dockerfile`: Instructions for building the Docker container
-- `nginx.conf`: Nginx server configuration
-- `img/preview.gif`: Preview image of the application
+```
+npm test
+```
 
-## Dependencies
+## Building for Production
 
-- HLS.js (loaded via CDN)
-- Nginx (used in Docker container)
+To create a production build:
 
-## Notes
+```
+npm run build
+```
 
-- Ensure you have the rights to use and display the traffic camera feeds.
-- Playing multiple video streams simultaneously can be resource-intensive. Consider the capabilities of the user's device and network.
-
-## License
-
-This project is open source and available under the MIT License.
+This will create a `dist` directory with the built files.
 
 ## Contributing
 
-Contributions to improve the application are welcome. Please feel free to submit pull requests or open issues to discuss potential enhancements.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
