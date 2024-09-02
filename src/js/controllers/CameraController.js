@@ -1,8 +1,21 @@
+/**
+ * @fileoverview Controller for managing camera operations in the DOT Traffic Camera Grid application.
+ */
+
 import CameraModel from '../models/CameraModel.js';
 import CameraView from '../views/CameraView.js';
 import config from '../config.js';
 
+/**
+ * @class CameraController
+ * @description Manages the interaction between the CameraModel and CameraView,
+ * handling user interactions and updating the view based on model changes.
+ */
 class CameraController {
+    /**
+     * Creates an instance of CameraController.
+     * @constructor
+     */
     constructor() {
         this.model = new CameraModel();
         this.view = new CameraView();
@@ -123,6 +136,25 @@ class CameraController {
         video.style.display = 'block';
     }
 
+    /**
+     * Pauses a video stream and handles cleanup.
+     * 
+     * @param {HTMLVideoElement} video - The video element to pause.
+     * @param {string} videoId - The unique identifier for the video.
+     * 
+     * @description This function performs the following actions:
+     * 1. Pauses the video playback.
+     * 2. If an HLS instance exists for this video, it destroys it to free up resources.
+     * 3. Removes the video from the list of active videos.
+     * 4. Shows the thumbnail image associated with the video.
+     * 5. Hides the video element.
+     * 
+     * @throws {Error} Throws an error if the video element or its container cannot be found.
+     * 
+     * @example
+     * // Assuming 'this' is an instance of a class containing activeVideos Map
+     * this.pauseVideo(document.getElementById('video-1'), 'video-1');
+     */
     pauseVideo(video, videoId) {
         video.pause();
         const hls = this.activeVideos.get(videoId);
@@ -130,10 +162,16 @@ class CameraController {
             hls.destroy();
         }
         this.activeVideos.delete(videoId);
-        
+    
         // Show the thumbnail again
         const mediaContainer = video.closest('.media-container');
+        if (!mediaContainer) {
+            throw new Error('Media container not found');
+        }
         const thumbnail = mediaContainer.querySelector('img');
+        if (!thumbnail) {
+            throw new Error('Thumbnail image not found');
+        }
         thumbnail.style.display = 'block';
         video.style.display = 'none';
     }

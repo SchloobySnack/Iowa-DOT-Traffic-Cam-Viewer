@@ -6,7 +6,8 @@
   "scripts": {
     "start": "serve src",
     "build": "mkdir -p dist && cp -R src/* dist/ && cp public/manifest.json dist/ && cp tailwind.config.js dist/",
-    "test": "jest"
+    "test": "jest",
+    "docs": "jsdoc -c jsdoc.conf.json"
   },
   "keywords": [
     "traffic",
