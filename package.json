@@ -8,13 +8,19 @@
     "build": "mkdir -p dist && cp -R src/* dist/ && cp public/manifest.json dist/ && cp tailwind.config.js dist/",
     "test": "jest"
   },
-  "keywords": ["traffic", "camera", "grid", "DOT"],
+  "keywords": [
+    "traffic",
+    "camera",
+    "grid",
+    "DOT"
+  ],
   "author": "Charles Schlue",
   "license": "MIT",
   "devDependencies": {
-    "serve": "^13.0.2",
+    "@babel/preset-env": "^7.14.7",
     "jest": "^27.0.6",
-    "@babel/preset-env": "^7.14.7"
+    "jsdoc": "^4.0.3",
+    "serve": "^13.0.2"
   },
   "jest": {
     "transform": {
