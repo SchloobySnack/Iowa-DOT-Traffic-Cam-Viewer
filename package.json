@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "keywords": ["traffic", "camera", "grid", "DOT"],
-  "author": "Your Name",
+  "author": "Charles Schlue",
   "license": "MIT",
   "devDependencies": {
     "serve": "^13.0.2",
