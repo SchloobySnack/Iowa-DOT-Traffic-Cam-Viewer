@@ -3,8 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const regionFilter = document.getElementById('region-filter');
     const sortNameBtn = document.getElementById('sort-name');
     const sortRegionBtn = document.getElementById('sort-region');
+    const showFavoritesBtn = document.getElementById('show-favorites');
     const activeVideos = new Map();
     let cameras = [];
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let showingFavorites = false;
 
     fetch('https://services.arcgis.com/8lRhdTsQyJpO52F1/arcgis/rest/services/Traffic_Cameras_View/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&relationParam=&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&defaultSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnTrueCurves=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token=')
         .then(response => response.json())
@@ -40,22 +43,61 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderCameras() {
         cameraGrid.innerHTML = '';
         const selectedRegion = regionFilter.value;
-        const filteredCameras = selectedRegion === 'all' ? cameras : cameras.filter(camera => camera.region === selectedRegion);
+        let filteredCameras = selectedRegion === 'all' ? cameras : cameras.filter(camera => camera.region === selectedRegion);
+        
+        if (showingFavorites) {
+            filteredCameras = filteredCameras.filter(camera => favorites.includes(camera.name));
+        }
 
         filteredCameras.forEach((camera, index) => {
             const cameraItem = document.createElement('div');
-            cameraItem.className = 'camera-item';
+            cameraItem.className = 'card bg-base-100 shadow-xl';
+            const isFavorite = favorites.includes(camera.name);
             cameraItem.innerHTML = `
-                <img src="${camera.imageUrl}" alt="${camera.name}">
-                <p>${camera.name}</p>
-                <p>Region: ${camera.region}</p>
-                <button class="toggle-stream">Play/Pause</button>
+                <figure class="relative">
+                    <img src="${camera.imageUrl}" alt="${camera.name}" class="w-full h-48 object-cover">
+                    <button class="favorite-btn absolute top-2 right-2 text-2xl ${isFavorite ? 'text-yellow-500' : 'text-white'}">${isFavorite ? '★' : '☆'}</button>
+                </figure>
+                <div class="card-body p-4">
+                    <h2 class="card-title text-lg">${camera.name}</h2>
+                    <p>Region: ${camera.region}</p>
+                    <div class="card-actions justify-end mt-2">
+                        <button class="toggle-stream btn btn-primary btn-sm">Play/Pause</button>
+                    </div>
+                </div>
             `;
             const toggleButton = cameraItem.querySelector('.toggle-stream');
             toggleButton.addEventListener('click', () => toggleStream(camera, cameraItem, index));
+            
+            const favoriteButton = cameraItem.querySelector('.favorite-btn');
+            favoriteButton.addEventListener('click', () => toggleFavorite(camera, favoriteButton));
+            
             cameraGrid.appendChild(cameraItem);
         });
     }
+
+    function toggleFavorite(camera, button) {
+        const index = favorites.indexOf(camera.name);
+        if (index === -1) {
+            favorites.push(camera.name);
+            button.textContent = '★';
+            button.classList.remove('text-white');
+            button.classList.add('text-yellow-500');
+        } else {
+            favorites.splice(index, 1);
+            button.textContent = '☆';
+            button.classList.remove('text-yellow-500');
+            button.classList.add('text-white');
+        }
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        if (showingFavorites) renderCameras();
+    }
+
+    showFavoritesBtn.addEventListener('click', () => {
+        showingFavorites = !showingFavorites;
+        showFavoritesBtn.textContent = showingFavorites ? 'Show All' : 'Show Favorites';
+        renderCameras();
+    });
 
     function sortCameras(key) {
         cameras.sort((a, b) => a[key].localeCompare(b[key]));

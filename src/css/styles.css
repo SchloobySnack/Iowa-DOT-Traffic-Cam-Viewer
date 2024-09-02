@@ -79,3 +79,23 @@ select, button {
 .camera-item button:hover {
     background-color: #45a049;
 }
+
+.camera-item .favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+}
+
+.camera-item .favorite-btn.active {
+    color: #ffd700;
+}
+
+#show-favorites {
+    margin-left: 10px;
+}
